@@ -58,6 +58,7 @@ class TripListNotifier extends StateNotifier<List<Trip>> {
   }
 
   Future<void> loadTrips() async {
-    await _getTrips();
+    final tripOrFailure = await _getTrips();
+    tripOrFailure.fold((error) => state = [], (trips) => state = trips);
   }
 }
